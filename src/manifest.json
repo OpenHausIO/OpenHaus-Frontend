@@ -1,0 +1,21 @@
+{
+    "name": "OpenHaus - SmartHome",
+    "short_name": "OpenHaus",
+    "lang": "de",
+    "start_url": "/",
+    "display": "fullscreen",
+    "orientation": "any",
+    "theme_color": "#222c32",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "25x25",
+            "type": "mime"
+        },
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "mime"
+        }
+    ]
+}

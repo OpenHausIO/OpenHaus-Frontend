@@ -1,0 +1,65 @@
+// @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+//@import "~bootstrap/scss/_variables.scss";
+
+// Overwrite Bootstrap's variables here
+// You can find them in node_modules/bootstrap/scss/_variables.scss
+// Copy the variables you need into this file, don't modify files under node_modules/
+
+// Some example variables that you can uncomment:
+
+// Enabling shadows and gradients
+//$enable-shadows: true;
+//$enable-gradients: true;
+
+// Changing the body background and text
+//$body-bg: #d3e9eb;
+//$body-color: #151417;
+
+// Changing the border radius of buttons
+//$border-radius: 15px;
+
+//$text-primary: #cdd0d1;
+
+// Changing the theme colors
+$primary: #333c42;
+$secondary: #2b343a;
+//$success: #2bc550;
+//$info: #495dff;
+//$warning: #ef8143;
+//$danger: #ff293a;
+//$light: #dfe6ee;
+//$dark: #0f1319;
+
+$border-radius: 0px;
+// $enable-rounded: false;
+// $enable-shadows: true;
+$enable-gradients: true;
+
+
+//$font-family: "Arial";
+
+
+$input-btn-focus-width: 3px;
+$input-btn-focus-color: rgba(#fff, .30);
+$input-btn-border-width: 0px;
+
+
+// $navbar-brand-height: 60;
+
+
+$body-bg:#222c32;
+//$body-color: #eee;
+//$body-bg:     #000;
+$body-color: #cdd0d1;
+
+// Adding (!) an additional theme color (ex. classes btn-cool, bg-cool)
+//$theme-colors: (
+//  "cool": #4d3fa3
+//);
+
+
+
+
+$hr-color: "red";
+$hr-height: 5px;

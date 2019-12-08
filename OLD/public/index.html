@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+
+    <title>OpenHaus</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <script src=" https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <!--<script src="https://unpkg.com/vuex "></script>-->
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+
+        const socket = io();
+
+        socket.on("connect", function () {
+            console.log("Connected to server");
+        });
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement &&    // alternative standard method
+                !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {  // current working methods
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        $(document).ready(function () {
+
+            console.log("DOM loaded");
+
+
+            $("#fullscreenButton").click(function () {
+                console.log("Fullscreen clikc");
+                toggleFullScreen();
+            });
+            /*
+                        window.addEventListener('selectstart', function (e) {
+                            e.preventDefault();
+                        });
+            */
+            const CompCommands = httpVueLoader("/components/commands.vue");
+
+            // register componetsn
+            Vue.component('list-view', httpVueLoader("/components/list-view.vue"));
+            Vue.component('commands', CompCommands);
+
+
+            const routes = [{
+                path: "/login",
+                component: httpVueLoader("/templates/tpl.login.vue")
+            },
+            {
+                path: '/home',
+                component: httpVueLoader("/templates/tpl.home.vue")
+            },
+            {
+                path: '/rooms',
+                component: httpVueLoader("/components/router-view.vue"),
+                children: [
+                    {
+                        path: "",
+                        component: httpVueLoader("/templates/tpl.rooms-list.vue")
+                    },
+                    {
+                        path: ':_id',
+                        component: httpVueLoader("/templates/tpl.room-endpoints.vue"),
+                        props: true
+                    },
+                    {
+                        path: ':_id/:endpoint',
+                        component: httpVueLoader("/templates/tpl.commands.vue"),
+                        props: true
+                    }
+                ]
+
+            },
+            {
+                path: '/scenes',
+                component: httpVueLoader("/templates/tpl.scenes.vue")
+            },
+            {
+                path: '/lights',
+                component: httpVueLoader("/templates/tpl.lights.vue")
+            },
+            {
+                path: '/endpoints',
+                component: httpVueLoader("/components/router-view.vue"),
+                children: [
+                    {
+                        path: "",
+                        component: httpVueLoader("/templates/tpl.endpoints.vue")
+                    },
+                    {
+                        path: ":_id",
+                        component: httpVueLoader("/templates/tpl.commands.vue"),
+                        props: true
+                    }
+                ]
+
+            },
+            {
+                path: '/dashboard',
+                component: httpVueLoader("/templates/tpl.dashboard.vue")
+            },
+            {
+                path: "*",
+                redirect: "/login"
+            }
+            ];
+
+
+
+
+            // 3. Create the router instance and pass the `routes` option
+            // You can pass in additional options here, but let's
+            // keep it simple for now.
+            const router = new VueRouter({
+                routes // short for `routes: routes`
+            });
+
+
+            router.beforeEach((to, from, next) => {
+                console.log("from %s to %s", from, to)
+                next();
+            });
+
+
+            // 4. Create and mount the root instance.
+            // Make sure to inject the router with the router option to make the
+            // whole app router-aware.
+            const app = new Vue({
+                router
+            });
+
+
+
+
+
+
+            app.$mount('#app');
+            //Vue.use(Vuex);
+
+            // Now the app has started!    
+        });
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <div id="app">
+
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav w-100 row">
+
+
+                    <button onClick="toggleFullScreen()" class="nav-link">
+                        <i class="fas fa-chevron-left d-block"></i>
+                        <span>Fullscreen</span>
+                    </button>
+
+
+
+                    <li class="nav-item col text-center">
+                        <a href="javascript:window.history.back()" class="nav-link">
+                            <i class="fas fa-chevron-left d-block"></i>
+                            <span>Zurück</span>
+                        </a>
+                    </li>
+
+                    <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
+
+                    <li class="nav-item col text-center">
+                        <router-link to="/home" class="nav-link">
+                            <i class="fas fa-home d-block"></i>
+                            <span>Start</span>
+                        </router-link>
+                    </li>
+
+                    <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
+
+                    <li class="nav-item col text-center">
+                        <router-link to="/rooms" class="nav-link">
+                            <i class="fas fa-person-booth d-block"></i>
+                            <span>Räume</span>
+                        </router-link>
+                    </li>
+
+                    <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
+
+                    <li class="nav-item col text-center">
+                        <router-link to="/scenes" class="nav-link">
+                            <i class="fas fa-layer-group d-block"></i>
+                            <span>Szenen</span>
+                        </router-link>
+                    </li>
+
+                    <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
+
+                    <li class="nav-item col text-center">
+                        <router-link to="/lights" class="nav-link">
+                            <i class="fas fa-lightbulb d-block"></i>
+                            <span>Beleuchtung</span>
+                        </router-link>
+                    </li>
+
+                    <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
+
+                    <li class="nav-item col text-center">
+                        <router-link to="/endpoints" class="nav-link">
+                            <i class="fas fa-laptop-code d-block"></i>
+                            <span>Endpoints</span>
+                        </router-link>
+                    </li>
+
+                    <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
+
+
+                    <li class="nav-item col text-center">
+                        <router-link to="/dashboard" class="nav-link">
+                            <i class="fas fa-chart-line d-block"></i>
+                            <span>Dashboard</span>
+                        </router-link>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- NAVBAR -->
+
+
+        <!-- VIEW -->
+        <transition name="fade" mode="out-in">
+            <router-view class="view"></router-view>
+        </transition>
+        <!-- VIEW -->
+
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Short name">
+    <meta name="apple-mobile-web-app-title" content="Short name">
+    <meta name="theme-color" content="#222c32">
+    <meta name="msapplication-navbutton-color" content="#222c32">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="mime" sizes="25x25" href="icon.png">
+    <link rel="icon" type="mime" sizes="192x192" href="icon.png">
+    <link rel="apple-touch-icon" type="mime" sizes="25x25" href="icon.png">
+    <link rel="apple-touch-icon" type="mime" sizes="192x192" href="icon.png">
+
+</head>
+
+<body>
+    <div id="app">
+        <!--
+        <h1> <%= htmlWebpackPlugin.options.myPageHeader %> </h1>
+        <h3>Welcome to the Awesome application asdf</h3>-->
+
+
+
+        <!-- VIEW -->
+        <transition name="fade" mode="out-in">
+            <router-view class="view"></router-view>
+        </transition>
+        <!-- VIEW -->
+
+
+
+    </div>
+</body>
+
+</html>
