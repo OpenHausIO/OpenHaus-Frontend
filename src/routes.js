@@ -1,8 +1,13 @@
 import Blank from "./pages/blank.vue";
 import Login from "./pages/login.vue";
-import Home from "./pages/home.vue";
+
 
 import UserView from "./user-view.vue";
+
+import Home from "./pages/home.vue";
+import Room from "./pages/rooms.vue";
+import Scene from "./pages/scenes.vue";
+import Endpoint from "./pages/endpoints.vue";
 
 export default [{
     path: "/login",
@@ -10,7 +15,14 @@ export default [{
 },
 {
     path: '/home',
-    component: Home
+    component: UserView,
+    children: [
+        {
+            path: "",
+            component: Home
+        }
+    ]
+
 },
 {
     path: '/rooms',
@@ -18,7 +30,7 @@ export default [{
     children: [
         {
             path: "",
-            component: Blank
+            component: Room
         },
         {
             path: ':_id',
@@ -35,11 +47,19 @@ export default [{
 },
 {
     path: '/scenes',
-    component: Blank
-},
-{
-    path: '/lights',
-    component: Blank
+    component: UserView,
+    children: [
+        {
+            path: "",
+            component: Scene
+        },
+        {
+            path: ":_id",
+            component: Scene,
+            props: true
+        }
+    ]
+
 },
 {
     path: '/endpoints',
@@ -47,11 +67,11 @@ export default [{
     children: [
         {
             path: "",
-            component: Blank
+            component: Endpoint
         },
         {
             path: ":_id",
-            component: Blank,
+            component: Endpoint,
             props: true
         }
     ]

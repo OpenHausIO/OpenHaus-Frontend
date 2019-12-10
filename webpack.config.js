@@ -33,7 +33,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            title: '[Development] - OpenHaus',
+            title: process.env.NODE_ENV !== "production" ? "[Development] - OpenHaus" : "OpenHaus",
             hash: true,
             myPageHeader: 'Hello World my title',
             template: './src/index.html',

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Blank Page</h1>
+    <!--<navigation></navigation>-->
+    Scene
   </div>
 </template>
 

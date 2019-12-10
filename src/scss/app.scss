@@ -4,6 +4,35 @@
 @import './custom-styles';
 
 
+
+html, body{
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    color: rgba(255, 255, 255, .5) !important;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    /*
+    background-color: #101418;
+    background-color: #1c1b1e;
+    background-image: radial-gradient(ellipse,#23282e 0,rgba(35,40,46,.5) 50%,#101418 95%);
+
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      */  
+}
+
+
 .no-outline:focus, 
 .no-outline:active{
     outline: 0 !important;
@@ -11,7 +40,7 @@
 }
 
 
-@if(false){
+@if(true){
 *{
 -webkit-touch-callout: none; /* iOS Safari */
 -webkit-user-select: none; /* Safari */
@@ -21,3 +50,37 @@
 user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
 }
 }
+
+
+$router-fade-time: 0.25s; // 0.15
+
+.fade-enter-active, 
+.fade-leave-active {
+    transition: opacity $router-fade-time ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
+
+.child-view {
+    position: absolute;
+    transition: all $router-fade-time cubic-bezier(.55,0,.1,1);
+}
+
+/*
+.slide-left-enter,
+.slide-right-leave-active {
+    opacity: 0;
+    -webkit-transform: translate(30px, 0);
+    transform: translate(30px, 0);
+}
+
+.slide-left-leave-active, 
+.slide-right-enter {
+    opacity: 0;
+    -webkit-transform: translate(-30px, 0);
+    transform: translate(-30px, 0);
+}
+*/

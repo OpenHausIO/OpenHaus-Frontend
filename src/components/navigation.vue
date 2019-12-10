@@ -25,7 +25,7 @@
           <li style="width: 1px; background-color: rgba(0, 0, 0, .2)"></li>
 
           <li class="nav-item col">
-            <router-link to="/home" class="nav-link">
+            <router-link to="/home" class="nav-link text-info">
               <i class="fas fa-home d-inline fa-lg m-auto d-md-block"></i>
               <span class="m-auto d-md-block text-center">Home</span>
             </router-link>
@@ -66,8 +66,14 @@
               <span class="m-auto d-md-block text-center">Dashboard</span>
             </router-link>
           </li>
+
+          <li style="width: 1px; background-color: rgba(0, 0, 0, .2)" class="d-none"></li>
         </ul>
       </div>
+      <button onclick="window.history.back()" class="btn m-0 no-outline d-none">
+        <span>Fullscreen</span>
+        <i class="fas fa-chevron-right"></i>
+      </button>
     </nav>
     <!-- NAVBAR -->
   </div>

@@ -23,9 +23,10 @@ import routes from "./routes.js";
 
 import Navigation from "./components/navigation.vue";
 
+
 Vue.use(VueRouter);
 
-
+//Vue.component("user-view", import UserView from "./user-view.vue";)
 Vue.component("navigation", Navigation);
 
 
@@ -38,8 +39,13 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+
+
+
     console.log("from %s to %s", from, to)
+
     next();
+
 });
 
 
