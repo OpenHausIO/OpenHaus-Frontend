@@ -1,7 +1,6 @@
 <template>
   <div>
     <h3>Räume</h3>
-Add sub-rouer/view ?
     <div class="container-fluid">
       <div class="row">
         <router-link
@@ -59,6 +58,12 @@ export default {
         }
       ]
     };
+  },
+  beforeRouteUpdate(to, from, next) {
+    const toDepth = to.path.split("/").length;
+    const fromDepth = from.path.split("/").length;
+    this.transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
+    next();
   }
 };
 </script>
