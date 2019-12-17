@@ -3,7 +3,7 @@
     <div class="col-3">
       <h4 class="q-mb-none">Einloggen</h4>
 
-      <q-input label="E-Mail" hint="demo@open-haus.cloud" :dense="dense" v-model="email" />
+      <q-input label="E-Mail" hint="demo@open-haus.cloud" v-model="email" />
 
       <q-input
         label="Password"
@@ -36,24 +36,99 @@ export default {
     };
   },
   methods: {
+    uuid() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+        c
+      ) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    },
     submit: function() {
-      /*
-      if (this.email && this.password) {
-        if (
-          this.email === "demo@open-haus.cloud" &&
-          this.password === "Pa$$w0rd" &&
-          window.location.hostname === "open-haus.cloud"
-        ) {
-          console.log("demo login ");
-        } else {*/
-      console.log("submit clicked");
+      console.log("submit clicked", this.email);
+
+      if (this.email == "demo@open-haus.cloud") {
+        console.log("Set items");
+        window.localStorage.setItem(
+          "items",
+          JSON.stringify({
+            endpoints: [
+              {
+                _id: this.uuid(),
+                name: "TV #1"
+              },
+              {
+                _id: this.uuid(),
+                name: "TV #2"
+              },
+              {
+                _id: this.uuid(),
+                name: "AV-Receiver - Zone 1"
+              },
+              {
+                _id: this.uuid(),
+                name: "AV-Receiver - Zone 2"
+              }
+            ],
+            devices: [
+              {
+                _id: this.uuid(),
+                name: "AV-Receiver"
+              },
+              {
+                _id: this.uuid(),
+                name: "TV #1"
+              },
+              {
+                _id: this.uuid(),
+                name: "TV #2"
+              }
+            ],
+            rooms: [
+              {
+                _id: this.uuid(),
+                name: "Living-room",
+                icon: "fas fa-couch",
+                floor: 0
+              },
+              {
+                _id: this.uuid(),
+                name: "Bed-room #1",
+                icon: "fas fa-bed",
+                floor: 0
+              },
+              {
+                _id: this.uuid(),
+                name: "Bed-room #2",
+                icon: "fas fa-bed",
+                floor: -1
+              },
+              {
+                _id: this.uuid(),
+                name: "Master Bed-room",
+                icon: "fas fa-bed",
+                floor: 1
+              },
+              {
+                _id: this.uuid(),
+                name: "Kitchen",
+                icon: "fas fa-utensils",
+                floor: 0
+              },
+              {
+                _id: this.uuid(),
+                name: "Boilerroom",
+                icon: "fas fa-fire-alt",
+                floor: -1
+              }
+            ]
+          })
+        );
+      }
+
       window.localStorage.setItem("token", Date.now());
-      window.location.href = "/";
-      /*
-        }
-      } else {
-        console.log("Display error message");
-      }*/
+      window.location.href = "/#/home";
     }
   }
 };

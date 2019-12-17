@@ -44,14 +44,19 @@ const MAIN = [{
     path: "/home",
     component: () => import("pages/main.home.vue")
   }, {
-    path: "/rooms",
+    path: "/rooms/:_id?",
+    props: true,
     component: () => import("pages/main.rooms.vue")
   }, {
-    path: "/devices",
-    component: () => import("pages/blank.vue")
+    path: "/devices/:_id?",
+    component: () => import("pages/main.devices.vue")
   }, {
     path: "/scenes",
     component: () => import("pages/blank.vue")
+  }, {
+    path: "/endpoints/:_id?",
+    props: true,
+    component: () => import("pages/main.endpoints.vue")
   }]
 }];
 

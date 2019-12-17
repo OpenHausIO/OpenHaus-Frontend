@@ -15,15 +15,15 @@
         -->
 
         <q-separator dark vertical />
-        <q-btn stretch flat label="Home" to="/home" />
+        <q-btn stretch flat label="Home" @click="$router.push('/home')" />
         <q-separator dark vertical />
-        <q-btn stretch flat label="Room's" to="/rooms" />
+        <q-btn stretch flat label="Room's" @click="$router.push('/rooms')" />
         <q-separator dark vertical />
-        <q-btn stretch flat label="Devices's" to="/devices" />
+        <q-btn stretch flat label="Device's" @click="$router.push('/devices')" />
         <q-separator dark vertical />
-        <q-btn stretch flat label="Scene's" to="/scenes" />
+        <q-btn stretch flat label="Scene's" @click="$router.push('/scenes')" />
         <q-separator dark vertical />
-        <q-btn stretch flat label="Endpoint's" to="/endpoints" />
+        <q-btn stretch flat label="Endpoint's" @click="$router.push('/endpoints')" />
         <q-separator dark vertical />
         <q-btn streach flat icon="menu" @click="right = !right" />
       </q-toolbar>
@@ -42,40 +42,47 @@
     <q-drawer v-model="right" side="right" overlay bordered>
       <q-scroll-area class="fit">
         <q-list>
-          <q-item clickable activev-ripple>
+          <q-item>
             <q-item-section avatar>
               <q-icon
                 :name="$q.fullscreen.isActive ? 'fas fa-compress-arrows-alt' : 'fas fa-compress'"
               />
             </q-item-section>
-            <q-item-section @click="toggleFullscreen();">Fullscreen</q-item-section>
+            <q-item-section>
+              <q-btn stretch flat no-hover @click="toggleFullscreen();">Fullscreen</q-btn>
+            </q-item-section>
           </q-item>
 
           <q-separator />
 
-          <q-item clickable activev-ripple>
+          <q-item>
             <q-item-section avatar>
               <q-icon name="fas fa-sign-out-alt" />
             </q-item-section>
-            <q-item-section>Abmelden</q-item-section>
+            <q-item-section>
+              <q-btn stretch flat no-hover label="Logout" v-go-back="'/auth/logout'" />
+            </q-item-section>
           </q-item>
 
           <q-separator />
 
-          <q-item clickable activev-ripple>
+          <q-item>
             <q-item-section avatar>
               <q-icon name="fas fa-sliders-h" />
             </q-item-section>
-            <q-item-section>Einstellungen</q-item-section>
+            <q-item-section>
+              <q-btn stretch flat no-hover>Settings</q-btn>
+            </q-item-section>
           </q-item>
 
           <q-separator />
-          <q-item clickable v-ripple>
+
+          <q-item>
             <q-item-section avatar>
               <q-icon name="fas fa-cogs" />
             </q-item-section>
             <q-item-section>
-              <q-btn to="admin">Administration</q-btn>
+              <q-btn stretch flat no-hover @click="$router.push('/admin')">Administration</q-btn>
             </q-item-section>
           </q-item>
         </q-list>
