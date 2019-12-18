@@ -29,6 +29,9 @@ const AUTH = [{
   }, {
     path: "reset",
     component: () => import("pages/auth.reset.vue")
+  }, {
+    path: "*",
+    redirect: "login"
   }]
 }];
 
@@ -39,7 +42,8 @@ const MAIN = [{
   beforeEnter: isAuthenticated,
   children: [{
     path: "",
-    component: () => import("pages/main.home.vue")
+    //component: () => import("pages/main.home.vue")
+    redirect: "/home"
   }, {
     path: "/home",
     component: () => import("pages/main.home.vue")
@@ -49,10 +53,12 @@ const MAIN = [{
     component: () => import("pages/main.rooms.vue")
   }, {
     path: "/devices/:_id?",
+    props: true,
     component: () => import("pages/main.devices.vue")
   }, {
-    path: "/scenes",
-    component: () => import("pages/blank.vue")
+    path: "/scenes/:_id?",
+    props: true,
+    component: () => import("pages/main.scenes.vue")
   }, {
     path: "/endpoints/:_id?",
     props: true,

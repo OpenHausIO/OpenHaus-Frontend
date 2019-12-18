@@ -21,6 +21,7 @@
       </q-input>
 
       <q-btn color="primary" class="full-width q-mt-lg" @click="submit();" label="Absenden" />
+      <q-btn flat color="info" class="full-width q-mt-lg" to="./reset" label="Reset password" />
     </div>
   </div>
 </template>

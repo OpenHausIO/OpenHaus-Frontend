@@ -1,11 +1,16 @@
 <template>
   <div>
     <span>{{_id}}</span>
+
     <div v-if="items.length === 0">
       <h3>Looks empty here, you should add something...</h3>
     </div>
 
-    <item-list :list="items"></item-list>
+    <div v-if="!_id">
+      <item-list :list="items"></item-list>
+    </div>
+
+    <div v-if="_id">Single room</div>
 
     <!--
     <div v-if="items.length > 0 && !_id" class="q-pa-md row items-start q-gutter-md">
