@@ -1,17 +1,17 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-card flat bordered clickable to="./room._id" v-for="device in items" v-bind:key="device._id">
-      <q-card-section>
-        <div class="text-h6">{{device.name}}</div>
-      </q-card-section>
+  <div>
+    <span>{{_id}}</span>
+    <div v-if="items.length === 0">
+      <h3>Looks empty here, you should add something...</h3>
+    </div>
 
-      <q-card-section>{{device.floor}}</q-card-section>
-    </q-card>
+    <item-list :list="items"></item-list>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["_id"],
   data() {
     return {
       items: JSON.parse(window.localStorage.getItem("items"))["devices"]

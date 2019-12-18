@@ -11,9 +11,10 @@ export default {
   name: "PageLogin",
   created: () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("items");
 
     setTimeout(() => {
-      window.location.href = "/";
+      window.location.href = "/#/auth/login";
     }, 3000);
   }
 };
