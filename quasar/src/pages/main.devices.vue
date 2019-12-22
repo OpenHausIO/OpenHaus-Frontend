@@ -40,8 +40,9 @@ export default {
       items: JSON.parse(window.localStorage.getItem("items"))["devices"] || []
     };
   },
-  mounted() {
-    console.log(this.items);
+  updated() {
+    if (this._id) {
+    }
   }
 };
 </script>

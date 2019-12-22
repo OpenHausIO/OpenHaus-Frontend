@@ -10,8 +10,6 @@
       <item-list :list="items"></item-list>
     </div>
 
-    <div v-if="_id">Single room</div>
-
     <!--
     <div v-if="items.length > 0 && !_id" class="q-pa-md row items-start q-gutter-md">
       <q-card
@@ -40,8 +38,17 @@ export default {
       items: JSON.parse(window.localStorage.getItem("items"))["rooms"]
     };
   },
-  mounted() {
-    console.log(this.items);
+  updated() {
+    /*
+    if (this._id) {
+      alert("ID set, updated");
+      this.items = JSON.parse(window.localStorage.getItem("items"))[
+        "endpoints"
+      ].filter(e => {
+        return e._id === this._id;
+      });
+    }
+    */
   }
 };
 </script>
